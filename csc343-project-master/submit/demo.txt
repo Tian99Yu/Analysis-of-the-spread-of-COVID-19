@@ -1,0 +1,169 @@
+[~/csc343-project/schema]$ psql csc343h-gaoyu13                                                                      [master]
+psql (10.14 (Ubuntu 10.14-0ubuntu0.18.04.1))
+Type "help" for help.
+
+csc343h-gaoyu13=> \i schema.ddl
+psql:schema.ddl:1: NOTICE:  drop cascades to 6 other objects
+DETAIL:  drop cascades to table covid_project.regions
+drop cascades to table covid_project.covid_timeseries
+drop cascades to table covid_project.gdp
+drop cascades to table covid_project.economic_indicators
+drop cascades to table covid_project.development_index
+drop cascades to table covid_project.education_indicators
+DROP SCHEMA
+CREATE SCHEMA
+SET
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+csc343h-gaoyu13=> \i import_data.ddl
+SET
+COPY 262
+COPY 142808
+COPY 1829
+COPY 1058
+COPY 244
+COPY 234
+csc343h-gaoyu13=> \d
+                   List of relations
+    Schema     |         Name         | Type  |  Owner
+---------------+----------------------+-------+---------
+ covid_project | covid_timeseries     | table | gaoyu13
+ covid_project | development_index    | table | gaoyu13
+ covid_project | economic_indicators  | table | gaoyu13
+ covid_project | education_indicators | table | gaoyu13
+ covid_project | gdp                  | table | gaoyu13
+ covid_project | regions              | table | gaoyu13
+(6 rows)
+
+csc343h-gaoyu13=> SELECT COUNT(*) FROM covid_timeseries;
+ count
+--------
+ 142808
+(1 row)
+
+csc343h-gaoyu13=> SELECT COUNT(*) FROM development_index;
+ count
+-------
+   244
+(1 row)
+
+csc343h-gaoyu13=> SELECT COUNT(*) FROM economic_indicators;
+ count
+-------
+  1058
+(1 row)
+
+csc343h-gaoyu13=> SELECT COUNT(*) FROM education_indicators;
+ count
+-------
+   234
+(1 row)
+
+csc343h-gaoyu13=> SELECT COUNT(*) FROM gdp;
+ count
+-------
+  1829
+(1 row)
+
+csc343h-gaoyu13=> SELECT COUNT(*) FROM regions;
+ count
+-------
+   262
+(1 row)
+
+csc343h-gaoyu13=> SELECT * FROM covid_timeseries ORDER BY reportdate DESC LIMIT 10;
+ reportdate |       region       |     subregion      |   lat    |   lng    | confirmed | death | recovered
+------------+--------------------+--------------------+----------+----------+-----------+-------+-----------
+ 2020-11-02 | Zimbabwe           | Zimbabwe           | -19.0154 |  29.1549 |      8389 |   245 |      7939
+ 2020-11-02 | Zambia             | Zambia             | -13.1339 |  27.8493 |     16543 |   349 |     15733
+ 2020-11-02 | Yemen, Rep.        | Yemen, Rep.        |  15.5527 |  48.5164 |      2063 |   601 |      1375
+ 2020-11-02 | West Bank and Gaza | West Bank and Gaza |  31.9522 |  35.2332 |     54775 |   493 |     47169
+ 2020-11-02 | Vietnam            | Vietnam            |  14.0583 |  108.277 |      1192 |    35 |      1065
+ 2020-11-02 | Venezuela, RB      | Venezuela, RB      |   6.4238 | -66.5897 |     92705 |   806 |     87547
+ 2020-11-02 | Uzbekistan         | Uzbekistan         |  41.3775 |  64.5853 |     67254 |   571 |     64466
+ 2020-11-02 | Uruguay            | Uruguay            | -32.5228 | -55.7658 |      3165 |    60 |      2658
+ 2020-11-02 | United States      | Wyoming            |  43.0869 | -107.153 |     14167 |    97 |         0
+ 2020-11-02 | United States      | Wisconsin          |  44.3951 |  -89.798 |    232295 |  2050 |         0
+(10 rows)
+
+csc343h-gaoyu13=> SELECT * FROM development_index LIMIT 10;
+csc343h-gaoyu13=> SELECT * FROM development_index LIMIT 10;
+                   region                   | hospitals_per_1k | human_capital_index | school_enrollment_primary | school_enrollment_secondary
+--------------------------------------------+------------------+---------------------+---------------------------+-----------------------------
+ Nigeria                                    |                  |               0.534 |                           |                     42.0025
+ France                                     |              6.5 |               0.891 |                   98.9273 |                     104.139
+ Armenia                                    |              4.2 |                0.76 |                   90.7227 |                     86.4723
+ Rwanda                                     |                  |               0.536 |                   94.7898 |                      44.319
+ Cambodia                                   |              0.8 |               0.581 |                   90.2655 |
+ Morocco                                    |              1.1 |               0.676 |                    99.099 |                     81.1856
+ Moldova                                    |              5.8 |                     |                   86.3142 |                     86.3639
+ South Sudan                                |                  |               0.413 |                           |
+ Comoros                                    |                  |               0.538 |                   80.7538 |                     59.4689
+ Sub-Saharan Africa (excluding high income) |                  |                     |                           |                     43.2461
+(10 rows)
+
+csc343h-gaoyu13=> SELECT * FROM economic_indicators LIMIT 10;
+  region   | year | household_savings |   gdp   | household_debt
+-----------+------+-------------------+---------+----------------
+ Australia | 2000 |           2.03939 | 28249.4 |        125.209
+ Australia | 2001 |           3.32661 |   29475 |        130.522
+ Australia | 2002 |         -0.998092 |   30741 |        150.041
+ Australia | 2003 |        -0.0696757 | 32245.4 |         161.51
+ Australia | 2004 |           1.12038 | 33856.9 |        171.806
+ Australia | 2005 |          0.320219 | 35570.8 |        181.829
+ Australia | 2006 |          0.831749 | 37844.8 |        186.958
+ Australia | 2007 |           2.52435 | 39597.7 |        189.703
+ Australia | 2008 |           8.87188 | 40094.8 |        183.467
+ Australia | 2009 |           6.82405 | 41615.3 |        189.435
+(10 rows)
+
+csc343h-gaoyu13=> SELECT * FROM education_indicators LIMIT 10;
+                      region                       | perc_school_enrollment_primary | perc_school_enrollment_secondary | literacy_rate | rnd_expenditure
+---------------------------------------------------+--------------------------------+----------------------------------+---------------+-----------------
+ West Bank and Gaza                                |                        97.2186 |                                  |       94.8428 |         90.6723
+ IBRD only                                         |                        89.3655 |                           1.5501 |       94.3297 |         84.0603
+ Moldova                                           |                                |                          0.25498 |       86.3142 |         86.3639
+ Antigua and Barbuda                               |                                |                                  |       95.6955 |         111.196
+ Latin America & Caribbean (excluding high income) |                        94.1703 |                         0.747843 |       93.8097 |         97.9648
+ Macao SAR, China                                  |                        96.5385 |                          0.20351 |       96.3955 |         101.037
+ Hong Kong SAR, China                              |                                |                          0.86096 |       95.4548 |          107.74
+ Greece                                            |                         97.936 |                          1.17732 |       98.2204 |         104.878
+ Romania                                           |                        98.8445 |                           0.5051 |       82.2283 |         89.0691
+ Lesotho                                           |                                |                                  |       93.3106 |         62.0139
+(10 rows)
+
+csc343h-gaoyu13=> SELECT * FROM gdp LIMIT 10;
+  region   | year | quarter |  gdp
+-----------+------+---------+--------
+ Australia | 2011 |       1 | 244133
+ Australia | 2011 |       2 | 262323
+ Australia | 2011 |       3 | 266730
+ Australia | 2011 |       4 | 277841
+ Australia | 2012 |       1 | 256512
+ Australia | 2012 |       2 | 272788
+ Australia | 2012 |       3 | 271982
+ Australia | 2012 |       4 | 283896
+ Australia | 2013 |       1 | 264570
+ Australia | 2013 |       2 | 279814
+(10 rows)
+
+csc343h-gaoyu13=> SELECT * FROM regions LIMIT 10;
+        region        | population | habitable_area
+----------------------+------------+----------------
+ Aruba                |     106314 |            180
+ Afghanistan          |   38041754 |         652860
+ Angola               |   31825295 |     1.2467e+06
+ Albania              |    2854191 |          27400
+ Andorra              |      77142 |            470
+ Arab World           |  427870270 |    1.12326e+07
+ United Arab Emirates |    9770529 |          71020
+ Argentina            |   44938712 |    2.73669e+06
+ Armenia              |    2957731 |          28470
+ American Samoa       |      55312 |            200
+(10 rows)
+
+

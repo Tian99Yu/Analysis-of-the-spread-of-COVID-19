@@ -1,0 +1,4 @@
+Human development index: http://hdr.undp.org/en/indicators/137506#
+Hospital_per_capita: https://data.worldbank.org/indicator/SH.MED.BEDS.ZS?end=2015&name_desc=false&start=2015&view=map
+primary_school_enrollment_rate: https://data.worldbank.org/indicator/SE.PRM.NENR
+Secondary_school_enrollment_rate:https://data.worldbank.org/indicator/SE.SEC.ENRR
